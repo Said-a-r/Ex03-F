@@ -3,6 +3,9 @@ package org.ucb.appp1.di
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 import org.ucb.appp1.config.AppDatabase
+import org.ucb.appp1.exchange.data.datasource.RealTimeDataBase
+import org.ucb.appp1.exchange.data.repository.ExchangeRepositoryImpl
+import org.ucb.appp1.exchange.domain.repository.ExchangeRepository
 import org.ucb.appp1.movies.data.dao.DollarDao
 import org.ucb.appp1.movies.data.datasource.DollarLocalDataSource
 import org.ucb.appp1.movies.data.repository.DollarRepositoryImpl
@@ -21,4 +24,6 @@ val dataModule = module {
     }
     singleOf(::DollarLocalDataSource)
     single<DollarRepository> { DollarRepositoryImpl(get()) }
+    singleOf(::RealTimeDataBase)
+    single<ExchangeRepository> { ExchangeRepositoryImpl(get()) }
 }
