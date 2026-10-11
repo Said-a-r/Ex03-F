@@ -9,6 +9,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import appp1.shared.generated.resources.Res
+import appp1.shared.generated.resources.allStringResources
+import appp1.shared.generated.resources.login_title
+import edu.ucb.ds.buttons.MainButton
+import org.jetbrains.compose.resources.getString
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import org.ucb.appp1.exchange.presentation.viewmodel.ExchangeViewModel
 
@@ -22,6 +28,9 @@ fun ExchangeScreen(viewModel: ExchangeViewModel = koinViewModel()) {
     ) {
         val message = viewModel.message.collectAsState()
         Text(message.value)
+        MainButton(stringResource(Res.string.login_title)) {
+            print("Press")
+        }
     }
 
 }
