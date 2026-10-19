@@ -85,6 +85,8 @@ kotlin {
             implementation(libs.koin.android)
             implementation(libs.ktor.client.okhttp)
             implementation(libs.androidx.room3.sqlite.wrapper)
+            implementation(libs.androidx.work.runtime.ktx)
+
         }
         commonMain.dependencies {
             implementation(libs.compose.runtime)
