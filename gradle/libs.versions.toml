@@ -1,8 +1,8 @@
 [versions]
-agp = "9.0.1"
-android-compileSdk = "36"
+agp = "9.1.0"
+android-compileSdk = "37"
 android-minSdk = "24"
-android-targetSdk = "36"
+android-targetSdk = "37"
 androidx-activity = "1.13.0"
 androidx-appcompat = "1.7.1"
 androidx-core = "1.19.0"
@@ -20,12 +20,17 @@ ktor = "3.4.1"
 ksp = "2.3.6"
 room3 = "3.1.0-alpha01"
 sqlite = "2.7.1"
-googleServices = "4.4.2" # O la última versión estable
+googleServices = "4.4.2"
 workRuntimeKtx = "2.11.0"
-
+sentry = "0.8.0"
 
 [libraries]
 firebase-database = { module = "dev.gitlive:firebase-database", version.ref = "firebaseDatabase" }
+firebase-config = { module = "dev.gitlive:firebase-config", version.ref = "firebaseDatabase" }
+firebase-firestore = { module = "dev.gitlive:firebase-firestore", version.ref = "firebaseDatabase" }
+firebase-messaging = { module = "com.google.firebase:firebase-messaging-ktx", version = "24.1.0" }
+
+
 koin-android = { module = "io.insert-koin:koin-android" }
 koin-compose = { module = "io.insert-koin:koin-compose" ,version.ref = "koin"}
 koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel" ,version.ref = "koin"}
@@ -59,9 +64,9 @@ ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx
 androidx-sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sqlite" }
 androidx-room3-runtime = { module = "androidx.room3:room3-runtime", version.ref = "room3" }
 androidx-room3-compiler = { module = "androidx.room3:room3-compiler", version.ref = "room3" }
-# Optional SQLite Wrapper
 androidx-room3-sqlite-wrapper = { module = "androidx.room3:room3-sqlite-wrapper", version.ref = "room3" }
-
+androidx-sqlite-android = { module = "androidx.sqlite:sqlite-framework", version.ref = "sqlite" }
+sentry-kotlin-multiplatform = { module = "io.sentry:sentry-kotlin-multiplatform", version.ref = "sentry" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

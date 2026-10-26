@@ -2,29 +2,46 @@ package org.ucb.appp1.exchange.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import org.ucb.appp1.exchange.domain.usecase.ObserveExchangeUseCase
+import org.ucb.appp1.exchange.data.datasource.FirestoreDataSource // ✅ Nuevo
+import org.ucb.appp1.exchange.data.datasource.RemoteConfigDataSource
+import org.ucb.appp1.exchange.data.entity.DollarEntity
+import org.ucb.appp1.exchange.domain.repository.ExchangeRepository
 
 class ExchangeViewModel(
-    val usecase: ObserveExchangeUseCase
-): ViewModel() {
+    private val repository: ExchangeRepository,
+    private val remoteConfig: RemoteConfigDataSource,
+    private val firestore: FirestoreDataSource
+) : ViewModel() {
 
-    private val _message = MutableStateFlow<String>("")
-    val message = _message.asStateFlow()
+    val dollarList: StateFlow<List<DollarEntity>> = repository.getDollarsFlow()
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000),
+            initialValue = emptyList()
+        )
 
-    init {
-        observeMessage()
-    }
-
-    private fun observeMessage() {
+    fun onSaveDollarClick() {
         viewModelScope.launch {
-            usecase.invoke()
-                .collect { message ->
-                    _message.value = message?:"Test"
-                }
+            try {
+                val precioNube = remoteConfig.getDollarPrice()
+
+                val nuevoDolar = DollarEntity(
+                    id = kotlin.random.Random.nextInt(1, 999999).toString(),
+                    name = "Dólar Oficial",
+                    price = precioNube
+                )
+
+                repository.saveDollar(nuevoDolar)
+
+                firestore.saveDollarToCloud(nuevoDolar)
+
+            } catch (e: Exception) {
+                println("Error al guardar: ${e.message}")
+            }
         }
     }
-
 }

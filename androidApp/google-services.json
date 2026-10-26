@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "274895679753",
+    "firebase_url": "https://test-eb00bd40-default-rtdb.firebaseio.com",
+    "project_id": "test-eb00bd40",
+    "storage_bucket": "test-eb00bd40.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:274895679753:android:7eb5ff3667c90e6e7663d8",
+        "android_client_info": {
+          "package_name": "org.donnico.projectv1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBipVXuxcLLJeZE8EBfhWTC4TQkYIIcVDY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:274895679753:android:2257b32566768d817663d8",
+        "android_client_info": {
+          "package_name": "org.ucb.appp1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBipVXuxcLLJeZE8EBfhWTC4TQkYIIcVDY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
