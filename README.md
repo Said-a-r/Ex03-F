@@ -1,31 +1,32 @@
-This is a Kotlin Multiplatform project targeting Android, iOS.
+# Proyecto Kotlin Multiplatform - Aplicación Móvil UCB
 
-* [/iosApp](./iosApp/iosApp) contains an iOS application. Even if you’re sharing your UI with Compose Multiplatform,
-  you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
-
-* [/shared](./shared/src) is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - [commonMain](./shared/src/commonMain/kotlin) is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    the [iosMain](./shared/src/iosMain/kotlin) folder would be the right place for such calls.
-    Similarly, if you want to edit the Desktop (JVM) specific part, the [jvmMain](./shared/src/jvmMain/kotlin)
-    folder is the appropriate location.
-
-### Running the apps
-
-Use the run configurations provided by the run widget in your IDE's toolbar. You can also use these commands and options:
-
-- Android app: `./gradlew :androidApp:assembleDebug`
-- iOS app: open the [/iosApp](./iosApp) directory in Xcode and run it from there.
-
-### Running tests
-
-Use the run button in your IDE's editor gutter, or run tests using Gradle tasks:
-
-- Android tests: `./gradlew :shared:testAndroidHostTest`
-- iOS tests: `./gradlew :shared:iosSimulatorArm64Test`
+## Integrantes del Grupo
+- Joel Delgado Churquina
+- Dayana Maque Bautista
+- Aron Fuentes
 
 ---
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+## Ejercicios Implementados
+
+### 1. E25-2 · Room como fuente de verdad para configuración local
+- **Descripción**: Implementación de almacenamiento local con Room utilizando una fuente de verdad reactiva.
+- **Componentes**:
+  - Entidad `ConfigItem` (`id`, `clave`, `valor`, `timestamp`).
+  - DAO `ConfigDao` con inserción, consulta reactiva (`Flow<List<ConfigItem>>`) y eliminación (`deleteAll`, `deleteById`).
+  - Siembra automática de 3 registros de ejemplo al primer arranque de la aplicación.
+  - Pantalla en Jetpack Compose (`ConfigScreen`) y ViewModel (`ConfigViewModel`) con UI 100% reactiva al Flow.
+
+### 2. E50-4 · WorkManager periódico + Room + Notificación al completar
+- **Descripción**: Tareas en segundo plano con WorkManager sincronizadas con Room y notificaciones push locales.
+- **Componentes**:
+  - Entidad `TablaNovedad` y DAO `NovedadDao` para el historial de novedades.
+  - `NovedadWorker` (Worker periódico) que simula la descarga de actualizaciones, guarda los registros en Room y compara con la última ejecución para decidir si se dispara una notificación interna.
+  - Manejo robusto de errores en el Worker utilizando `Result.retry()` con control de intentos máximos (`runAttemptCount`).
+  - Pantalla de historial reactiva (`NovedadScreen`) leída de Room mediante `Flow`.
+
+---
+
+### Comandos de Compilación (Gradle)
+- Compilar APK de Android (Debug): `./gradlew :androidApp:assembleDebug`
+- Ejecutar pruebas unitarias de Android: `./gradlew :shared:testAndroidHostTest`
